@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUDKILLER - Meme Token of Pure Anarchy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        /* Global Reset & Base Styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
+            color: #00ffcc; /* Cyber Green */
+            font-family: 'Orbitron', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Stars Animation */
+        .stars-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden; /* Ensure stars stay within bounds */
+        }
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+        .star-small { width: 1px; height: 1px; opacity: 0.8; }
+        .star-medium { width: 2px; height: 2px; opacity: 0.9; }
+        .star-large { width: 3px; height: 3px; opacity: 1; }
+
+        @keyframes twinkle {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        @keyframes moveBackground {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+
+        /* Main Content Styling */
+        main {
+            flex-grow: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 6rem 1rem 3rem; /* Increased padding */
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+            border-bottom: 2px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+        }
+        header img.banner {
+            width: clamp(280px, 90vw, 1000px); /* Responsive max-width */
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 0 30px #00ffff;
+            object-fit: cover; /* Ensures image covers area */
+            margin-bottom: 2rem;
+        }
+        header img.logo {
+            width: 180px; /* Slightly larger */
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid #00ffff; /* Thicker border */
+            background: #000;
+            object-fit: cover;
+            box-shadow: 0 0 30px #00ffcc, inset 0 0 15px #00ffff;
+            transform: translateY(-50%); /* Move up to overlap banner */
+            margin-bottom: -90px; /* Adjust margin to pull up content */
+            position: relative;
+            z-index: 2;
+            animation: pulse 2s infinite alternate;
+        }
+        @keyframes pulse {
+            from { box-shadow: 0 0 30px #00ffcc, inset 0 0 15px #00ffff; }
+            to { box-shadow: 0 0 45px #00ffff, inset 0 0 20px #00ffcc; }
+        }
+
+        header h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(2.5rem, 8vw, 4.5rem); /* Responsive font size */
+            margin-top: 1.5rem;
+            color: #00ffff;
+            text-shadow: 0 0 30px #00ffcc, 0 0 10px #00ffff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        header p {
+            font-size: clamp(1rem, 3vw, 1.4rem); /* Responsive font size */
+            color: #b0e0e6; /* Lighter cyan for description */
+            margin-top: 0.8rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        section {
+            padding: 4rem 1.5rem; /* Increased vertical padding */
+            margin: 4rem auto; /* Increased margin */
+            max-width: 900px; /* Slightly narrower for focus */
+            background: rgba(0, 0, 0, 0.75); /* Darker background */
+            border-radius: 20px; /* More rounded corners */
+            border: 2px solid #00ffff; /* Brighter border */
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.4), inset 0 0 10px rgba(0, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+        }
+        section::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 255, 204, 0.05));
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.7;
+        }
+
+        section h2 {
+            font-size: clamp(1.8rem, 5vw, 3rem); /* Responsive font size */
+            text-align: center;
+            color: #00ff99; /* Bright green */
+            margin-bottom: 2rem; /* More space */
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 0 0 15px #00ff99;
+            text-transform: uppercase;
+        }
+        section p, section ul, section ol {
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem); /* Responsive font size */
+            line-height: 1.8;
+            padding-left: 1.5rem;
+            color: #e0fafa; /* Lighter text for readability */
+            font-family: 'Roboto Mono', monospace;
+        }
+        section ul strong {
+            color: #00ffff;
+        }
+        section ol {
+            padding-left: 2.5rem; /* For numbered lists */
+        }
+        section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .features {
+            display: grid; /* Use grid for better layout */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive grid */
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .feature-box {
+            background: rgba(17, 17, 17, 0.9); /* Slightly transparent */
+            padding: 1.8rem; /* More padding */
+            border: 2px solid #00ffcc; /* Brighter border */
+            border-radius: 15px; /* More rounded */
+            text-align: center;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4), inset 0 0 8px rgba(0, 255, 204, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: float 3s infinite alternate; /* Subtle floating animation */
+        }
+        .feature-box:hover {
+            transform: translateY(-8px) scale(1.05); /* Lift and slightly enlarge */
+            box-shadow: 0 0 40px #00ffff, inset 0 0 15px #00ffcc;
+            background: rgba(25, 25, 25, 0.95);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .feature-box h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.3rem; /* Slightly larger heading */
+            color: #00ffff;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 0 10px #00ffff;
+            text-transform: uppercase;
+        }
+        .feature-box p {
+            font-size: 0.95rem; /* Consistent body text size */
+            color: #c0f0f0;
+            padding-left: 0; /* Remove padding from feature box p */
+        }
+
+        /* Roadmap & How to Buy specific styling */
+        section:nth-of-type(4) ul li:nth-child(-n+2)::before {
+            content: '✔️'; /* Checkmark for completed phases */
+            margin-right: 10px;
+            color: #00ff00;
+        }
+        section:nth-of-type(4) ul li:nth-child(3)::before {
+            content: '🔄'; /* Spin icon for ongoing phase */
+            margin-right: 10px;
+            color: #ffcc00;
+        }
+        section:nth-of-type(4) ul li:nth-child(n+4)::before {
+            content: '🔜'; /* Soon icon for future phases */
+            margin-right: 10px;
+            color: #ff6600;
+        }
+        section:nth-of-type(4) ul li:last-child::before {
+            content: '👑'; /* Crown for ultimate phase */
+            margin-right: 10px;
+            color: #ffd700;
+        }
+
+        section:nth-of-type(5) ol li::marker {
+            font-weight: bold;
+            color: #00ffff;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem; /* More padding */
+            border-top: 2px solid #00ffff; /* Brighter border */
+            font-size: 0.95rem;
+            color: #888;
+            margin-top: 5rem; /* More margin */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+            font-family: 'Roboto Mono', monospace;
+        }
+        footer p {
+            color: #b0e0e6;
+        }
+
+        /* Links */
+        a {
+            color: #00ffff;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        a:hover {
+            text-decoration: none; /* No underline on hover */
+            color: #00ffcc; /* Change color on hover */
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header { padding: 4rem 1rem 2rem; }
+            header h1 { font-size: clamp(2rem, 7vw, 3.5rem); }
+            header p { font-size: clamp(0.9rem, 2.5vw, 1.2rem); }
+            header img.logo {
+                width: 140px;
+                height: 140px;
+                margin-top: -70px;
+                margin-bottom: -70px;
+            }
+            section { padding: 2.5rem 1rem; margin: 2.5rem auto; }
+            section h2 { font-size: clamp(1.6rem, 4.5vw, 2.5rem); }
+            section p, section ul, section ol { font-size: clamp(0.9rem, 2.3vw, 1rem); }
+            .feature-box { padding: 1.2rem; }
+            .feature-box h3 { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 480px) {
+            header { padding: 3rem 0.5rem 1.5rem; }
+            header h1 { font-size: clamp(1.8rem, 6vw, 3rem); }
+            header p { font-size: clamp(0.85rem, 2.2vw, 1rem); }
+            header img.logo {
+                width: 120px;
+                height: 120px;
+                margin-top: -60px;
+                margin-bottom: -60px;
+            }
+            section { padding: 2rem 0.8rem; margin: 2rem auto; }
+            section h2 { font-size: clamp(1.4rem, 4vw, 2rem); }
+            section p, section ul, section ol { padding-left: 1rem; font-size: clamp(0.85rem, 2.1vw, 0.95rem); }
+            .feature-box { width: 100%; } /* Full width on small screens */
+            .features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars-container" id="stars-background"></div>
+
+    <header>
+        <img src="fudkiller banner.png" alt="FUDKILLER Banner - Embrace the Chaos" class="banner">
+        <img src="fudkiller coin.png" alt="FUDKILLER Token Logo" class="logo">
+        <h1>FUDKILLER</h1>
+        <p>Unleashing the ultimate meme token. No utility, just pure, unadulterated chaos, and relentless FUD destruction!</p>
+    </header>
+
+    <main>
+        <section id="token-info">
+            <h2>💥 Token Info</h2>
+            <ul>
+                <li><strong>Name:</strong> FUDKILLER</li>
+                <li><strong>Symbol:</strong> FUD</li>
+                <li><strong>Decimals:</strong> 18</li>
+                <li><strong>Total Supply:</strong> 1,000,000,000 FUD</li>
+                
+                <li><strong>Circulating Supply:</strong> 500,000,000 FUD</li>
+            </ul>
+        </section>
+
+        <section id="what-is-fudkiller">
+            <h2> What is FUDKILLER?</h2>
+            <p style="font-size: 1.1rem; text-align: center; color: #b0e0e6;">
+                This isn't just a token; it's a digital rebellion against the mundane. We reject whitepapers, scorn use-cases, and embrace the glorious anarchy of 100% meme-fueled chaos!
+            </p>
+        </section>
+
+        <section id="why-choose-fudkiller">
+            <h2> Why Join the FUDKILLER Horde?</h2>
+            <div class="features">
+                <div class="feature-box">
+                    <h3>Community Driven</h3>
+                    <p>Every shred of glorious chaos emanates directly from you, the true degens of the crypto realm.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>No Utility, Only Pure Unhinged Fun</h3>
+                    <p>Forget real-world utility; we deliver real-world insanity. This is pure, unadulterated memetic power!</p>
+                </div>
+                <div class="feature-box">
+                    <h3>The Anti-FUD Protocol</h3>
+                    <p>Got FUD? We've got FUDKILL. Our protocol eliminates doubt, fear, and uncertainty with extreme prejudice.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Liquidity Locked & Loaded</h3>
+                    <p>Our liquidity is locked in the abyss, ensuring perpetual chaos. Your FUD, however, is now gloriously unlocked!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap">
+            <h2>🚀 Roadmap to Meme Domination</h2>
+            <ul>
+                <li>Phase 1: Token Launch + Website + Chaos Initiated</li>
+                <li>Phase 2: Meme Raids Activated + Twitter Trend Domination + 10,000+ Holders</li>
+                <li>Phase 3: Legendary NFT Meme Drop + Exclusive Merch Unveiled + *Strategic* Fake Partnerships 😂</li>
+                <li>Phase 4: Global Meme War Declared + Witness the Ultimate FUD Burn Event</li>
+                <li>Phase 5: The Meme Universe Conquered. All hail FUDKILLER!</li>
+            </ul>
+        </section>
+
+        <section id="how-to-buy">
+            <h2>🧠 How to Acquire the FUD</h2>
+            <ol>
+                <li><strong>Initiate Wallet Setup:</strong> Arm yourself with a Solana-compatible wallet (e.g., Phantom, Solflare).</li>
+                <li><strong>Navigate to the Anarchy Exchange:</strong> Proceed directly to Raydium DEX.</li>
+                <li><strong>Locate the Chaos Core:</strong> Search for "FUDKILLER" or, for direct action, paste our sacred contract address.</li>
+                <li><strong>Unleash the Swap:</strong> Exchange your SOL for a glorious bounty of FUD!</li>
+            </ol>
+        </section>
+
+        <section id="connect-with-us">
+            <h2>📡 Connect With the Hivemind</h2>
+            <ul>
+                <li><strong>Direct Comms:</strong> <a href="fudkiller.org">fudkiller.org</a></li>
+                <li><strong>Twitter:</strong> <a href="https://x.com/FudKillerToken" target="_blank" rel="https://x.com/FudKillerToken">@FUDKILLER_Token</a></li>
+                <li><strong>Telegram:</strong> <a href="https://t.me/fudkiller_community" target="_blank" rel="noopener noreferrer">Join the Chaos Chamber</a> (Link needed)</li>
+                <li><strong>Discord:</strong> <a href="https://discord.gg/fudkiller" target="_blank" rel="noopener noreferrer">Enter the Anarchy Zone</a> (Link needed)</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>💀 No gods. No masters. No roadmap. No mercy. Just memes. Just FUDKILLER.</p>
+        <p>&copy; 2025 FUDKILLER. All rights reserved (or not, who cares?)</p>
+    </footer>
+
+    <script>
+        // Dynamic Stars Generation (simple CSS-based, no external libraries)
+        const starsContainer = document.getElementById('stars-background');
+        const numStars = 150; // Total number of stars
+
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random();
+            if (size < 0.6) {
+                star.classList.add('star-small');
+            } else if (size < 0.9) {
+                star.classList.add('star-medium');
+            } else {
+                star.classList.add('star-large');
+            }
+
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            star.style.left = `${x}vw`;
+            star.style.top = `${y}vh`;
+            star.style.animationDelay = `${Math.random() * 10}s`; // Stagger animation
+            star.style.animationDuration = `${1 + Math.random() * 2}s`; // Vary twinkle speed
+
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
